@@ -8,7 +8,8 @@ date -> is_weekend, is_holiday
 route direction -> 0/1 (depending on direction)
 """
 
-class dataProcessor:
+
+class DataProcessor:
 
     # Constructor: initialize instance with file containing the data.
     def __init__(self, data_file):
@@ -39,5 +40,6 @@ class dataProcessor:
 
 
 if __name__ == '__main__':
-    dp = dataProcessor('test.csv')
-    dp._get_bus_line_matrices()
+    # dp = DataProcessor('test.csv')
+    # dp._get_bus_line_matrices()
+    pass
