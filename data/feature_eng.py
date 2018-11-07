@@ -157,6 +157,13 @@ def registration_to_num(registration_col):
     return res
 
 
+# elpased_time: compute elapsed time in seconds between departure and arrival.
+# THIS IS THE TARGET VARIABLE THAT WILL BE PREDICTED ON THE TEST DATA. The datetime of arrival will be computed by adding the elapsed
+# time to the start time.
+def elapsed_time(start_col, end_col):
+
+
+
 # get_weather_features: get matrix of processed weather features stored in csv file with name data_file. ***
 def get_weather_features(data_file):
     # TODO
