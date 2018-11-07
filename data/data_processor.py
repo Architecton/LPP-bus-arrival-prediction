@@ -1,5 +1,6 @@
 import numpy as np
 import csv
+from feature_eng import *
 
 # DataProcessor: Class implementing methods used to create a feature matrix that can be used for regression analysis.
 class DataProcessor:
@@ -26,13 +27,15 @@ class DataProcessor:
 
         np.fromiter((add_line_row(row) for row in self.data_matrix[1:,:]), self.data_matrix.dtype, count=len(self.data_matrix[1:,:]))
 
-    # _decompose_features: construct new features from the composite features found in the data file.
-    def _decompose_features(self):
+    # _engineer_features: construct new features from the composite features found in the data file and add to data matrix.
+    # Also add weather features obtained from ARSO website.
+    def _engineer_features(self):
         # TODO create a new class feature engineering with methods that append features to matrices
         pass
 
+    def add_features(self):
+
 
 if __name__ == '__main__':
-    # dp = DataProcessor('test.csv')
-    # dp._get_bus_line_matrices()
-    pass
+    dp = DataProcessor('test.csv')
+    dp._get_bus_line_matrices()
