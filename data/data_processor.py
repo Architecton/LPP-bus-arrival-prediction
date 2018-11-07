@@ -1,6 +1,6 @@
 import numpy as np
 import csv
-import multiprocessing
+
 """
 Ideas for feature creation:
 date -> hours, minutes, seconds
@@ -8,7 +8,7 @@ date -> is_weekend, is_holiday
 route direction -> 0/1 (depending on direction)
 """
 
-class data_processor:
+class dataProcessor:
 
     # Constructor: initialize instance with file containing the data.
     def __init__(self, data_file):
@@ -29,11 +29,15 @@ class data_processor:
 
         # Get unique bus lines and make a dictionary that maps bus lines to empty row vector.
         self.bus_line_matrices = dict.fromkeys(np.unique(self.data_matrix[1:, 2]), np.array([], dtype=np.character).reshape(0, self.data_matrix.shape[1]))
-        # Get key values by applying the add_line_row function to each row in training matrix.
-        np.apply_along_axis(add_line_row, axis=1, arr=self.data_matrix[1:,:])
 
+        np.fromiter((add_line_row(row) for row in self.data_matrix[1:,:]), self.data_matrix.dtype, count=len(self.data_matrix[1:,:]))
 
     # _decompose_features: construct new features from the composite features found in the data file.
     def _decompose_features(self):
         # TODO create a new class feature engineering with methods that append features to matrices
         pass
+
+
+if __name__ == '__main__':
+    dp = dataProcessor('test.csv')
+    dp._get_bus_line_matrices()
