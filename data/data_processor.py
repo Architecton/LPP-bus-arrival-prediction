@@ -1,14 +1,7 @@
 import numpy as np
 import csv
 
-"""
-Ideas for feature creation:
-date -> hours, minutes, seconds
-date -> is_weekend, is_holiday
-route direction -> 0/1 (depending on direction)
-"""
-
-
+# DataProcessor: Class implementing methods used to create a feature matrix that can be used for regression analysis.
 class DataProcessor:
 
     # Constructor: initialize instance with file containing the data.

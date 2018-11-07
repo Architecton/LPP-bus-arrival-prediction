@@ -136,7 +136,7 @@ def registration_to_num(registration_col):
     # Go over columns and parse numbers.
     for col in registration_col:
         res[r_count] = int(col[7:])
-        
+
     # Return result.
     return res
 
