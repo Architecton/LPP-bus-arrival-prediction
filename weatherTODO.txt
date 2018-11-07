@@ -1,4 +1,4 @@
-padavine -> 0, 1, 2
-manjkajoče vrednosti -> 0
-dan -> index dneva v letu
-odstrani smeri vetra
+# TODO - 8./9.11.2018
+Zakodiraj smeri vetra
+Združi smiselne značilke s pca
+Združi matriko vremena z matriko značilk iz LPP datoteke.
