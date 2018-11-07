@@ -1,0 +1,4 @@
+padavine -> 0, 1, 2
+manjkajoče vrednosti -> 0
+dan -> index dneva v letu
+odstrani smeri vetra

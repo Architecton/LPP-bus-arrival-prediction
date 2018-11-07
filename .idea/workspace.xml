@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2ed82c86-2ac7-4fbe-afea-64a9fff7c68f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.~lock.train.csv#" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/data_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/data_processor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/feature_eng.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/feature_eng.py" afterDir="false" />
-    </list>
+    <list default="true" id="2ed82c86-2ac7-4fbe-afea-64a9fff7c68f" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,8 +31,8 @@
       <file leaf-file-name="feature_eng.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/data/feature_eng.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="34" selection-start-line="34" selection-end-line="34" />
+            <state relative-caret-position="645">
+              <caret line="43" column="8" lean-forward="true" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -73,7 +68,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="width" value="959" />
     <option name="height" value="1079" />
   </component>
@@ -285,8 +280,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/data/feature_eng.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        <state relative-caret-position="645">
+          <caret line="43" column="8" lean-forward="true" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
         </state>
       </provider>
     </entry>
