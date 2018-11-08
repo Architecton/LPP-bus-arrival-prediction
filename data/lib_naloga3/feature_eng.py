@@ -2,9 +2,6 @@ import datetime
 import numpy as np
 import csv
 import pandas as pd
-import pdb
-
-# TODO encapsulate into class that shows only the get_feature_matrix
 
 
 # decompose_datetime: take the date column and create a matrix containing the day, hour, minutes and seconds as columns.
@@ -38,7 +35,7 @@ def decompose_datetime(datetime_col):
         res[r_count, 7] = date_obj.weekday()
         # is holiday
         res[r_count, 8] = 1 if is_holiday(date_obj) else 0
-         # is school holiday
+        # is school holiday
         res[r_count, 9] = 1 if is_school_holiday(date_obj) else 0
         # is exam period
         res[r_count, 10] = 1 if is_exam_period(date_obj) else 0
@@ -180,6 +177,7 @@ def elapsed_time(start_col, end_col):
     def to_delta_seconds(timedelta_val):
         return timedelta_val.seconds
 
+    # Get differences between times.
     parse_date_vect = np.vectorize(parse_date)
     time_diff_vect = np.vectorize(time_diff)
     to_delta_seconds_vect = np.vectorize(to_delta_seconds)
@@ -190,8 +188,8 @@ def elapsed_time(start_col, end_col):
 # get_features_lpp: get matrix of new features obtained from the datetime and registration columns
 # Also append elapsed time feature.
 # This function also returns a column vector of datetime objects corresponding to the rows in the datetime_col.
-# 6, 3, 0
 def get_features_lpp(driver_id_col, datetime_col, route_direction_col, registration_col):
+    # Get features and stack side by side.
     datetime_features, dt_col = decompose_datetime(datetime_col)
     dir_feature = get_dir_feature(route_direction_col)
     reg_feature = registration_to_num(registration_col)
@@ -224,7 +222,7 @@ def get_features_arso(data_file):
 
     # Return weather data matrix and the datetime column vector.
     # Leave out the date
-    return weather_data_matrix[:,1:], dt_col
+    return weather_data_matrix[:, 1:], dt_col
 
 
 # join_lpp_arso: join the lpp and arso feature matrices by the date column.
@@ -250,32 +248,41 @@ def join_lpp_arso(features_lpp, features_arso, dt_lpp, dt_arso):
     return res
 
 
-# TODO enclapsulate in class that shows only the next two functions (method).
 # get_feature_matrix_training: get matrix of features obtained from the LPP and ARSO data sheets including the
 # values of the target variable obtained from the training set.
 def get_feature_matrix_train(lpp_line_matrix):
+    # Indices corresponding to columns needed for feature engineering.
     datetime_col = 6
     route_direction_col = 3
     registration_col = 0
+    # Get features by performing feature engineering on the LPP data matrix.
     features_lpp, dt_lpp = get_features_lpp(lpp_line_matrix[:, 1], lpp_line_matrix[:, datetime_col],
                                             lpp_line_matrix[:, route_direction_col],
                                             lpp_line_matrix[:, registration_col])
+    # Get weather features and datetime linking column vector.
     features_arso, dt_arso = get_features_arso('ljubljana_2012_vreme_raw.csv')
+    # Join LPP feature matrix with weather feature matrix.
     res = join_lpp_arso(features_lpp, features_arso, dt_lpp, dt_arso)
-    pdb.set_trace()
+    # Get target/dependent variable values.
     target = elapsed_time(lpp_line_matrix[:, 6], lpp_line_matrix[:, 8])
+    # Return feature matrix and independent variable column vector.
     return res.astype(float), target
 
 
 # get_feature_matrix_test: get matrix of features obtained from the LPP and ARSO data sheets without the
 # target variable column.
 def get_feature_matrix_test(lpp_line_matrix):
+    # Indices corresponding to columns needed for feature engineering.
     datetime_col = 6
     route_direction_col = 3
     registration_col = 0
+    # Get features by performing feature engineering on the LPP data matrix.
     features_lpp, dt_lpp = get_features_lpp(lpp_line_matrix[:, 1], lpp_line_matrix[:, datetime_col],
                                             lpp_line_matrix[:, route_direction_col],
                                             lpp_line_matrix[:, registration_col])
+    # Get weather features and datetime linking column vector.
     features_arso, dt_arso = get_features_arso('ljubljana_2012_vreme_raw.csv')
+    # Join LPP feature matrix with weather feature matrix.
     res = join_lpp_arso(features_lpp, features_arso, dt_lpp, dt_arso)
+    # return feature matrix.
     return res.astype(float)
