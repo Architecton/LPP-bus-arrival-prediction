@@ -1,8 +1,0 @@
-- Go over each datetime object for columns in lpp
-- Find index of same datetime object in columns in arso
-- store index of datetime in arso in column vector
-
-- use column vector of indices to build matrix from rows
-in arso matrix corresponding to the indices in the indices vector.
-
-- join the two matrices together using numpy.hstack

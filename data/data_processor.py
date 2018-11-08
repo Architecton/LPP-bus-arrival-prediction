@@ -43,5 +43,7 @@ class DataProcessor:
 
 # Run data processing to get data.
 if __name__ == '__main__':
-    dp = DataProcessor('test.csv')
+    dp = DataProcessor('precompetition_data/train_pred.csv')
     dp._get_bus_line_matrices()
+    stirinajstka = dp.bus_line_matrices['14']
+    features, target = feature_eng.get_feature_matrix_train(stirinajstka)
