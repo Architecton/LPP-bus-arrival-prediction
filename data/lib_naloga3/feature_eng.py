@@ -1,6 +1,10 @@
 import datetime
 import numpy as np
+import csv
 import pandas as pd
+
+# TODO encapsulate into class that shows only the get_feature_matrix
+
 
 # decompose_datetime: take the date column and create a matrix containing the day, hour, minutes and seconds as columns.
 # Also create a column vector of datetime objects for the data.
@@ -48,7 +52,8 @@ def decompose_datetime(datetime_col):
         # Increment row counter.
         r_count += 1
 
-    return res, date_obj
+    return res, dt_col
+
 
 # is holiday: is the date a work free holiday? ***
 def is_holiday(date_obj):
@@ -106,6 +111,7 @@ def is_study_year(date_obj):
     else:
         return False
 
+
 # is_study_year: is the day a working day for students? ***
 def is_information_day(date_obj):
     # Define information day dates.
@@ -128,7 +134,7 @@ def get_dir_feature(route_direction_col):
     # Go over unique values of column and encode with numeric values.
     for u in range(len(unique_vals)):
         col_cpy[col_cpy == unique_vals[u]] = str(enc)
-        enc +=1
+        enc += 1
 
     return col_cpy.astype(int)
 
@@ -151,20 +157,80 @@ def registration_to_num(registration_col):
             res[r_count] = int(col[7:-1])
             res[r_count, 1] = 1
 
-        r_count +=1
+        r_count += 1
 
     # Return result.
     return res
 
 
 # elpased_time: compute elapsed time in seconds between departure and arrival.
-# THIS IS THE TARGET VARIABLE THAT WILL BE PREDICTED ON THE TEST DATA. The datetime of arrival will be computed by adding the elapsed
-# time to the start time.
+# THIS IS THE TARGET VARIABLE THAT WILL BE PREDICTED ON THE TEST DATA.
+# The datetime of arrival will be computed by adding the elapsed time to the start time.
 def elapsed_time(start_col, end_col):
+    pass
 
 
+# get_features_lpp: get matrix of new features obtained from the datetime and registration columns
+# Also append elapsed time feature.
+# This function also returns a column vector of datetime objects corresponding to the rows in the datetime_col.
+def get_features_lpp(datetime_col, route_direction_col, registration_col):
+    datetime_features, dt_col = decompose_datetime(datetime_col)
+    dir_feature = get_dir_feature(route_direction_col)
+    reg_feature = registration_to_num(registration_col)
+    res_features = np.hstack((datetime_features, dir_feature, reg_feature))
+    return res_features, dt_col
 
-# get_weather_features: get matrix of processed weather features stored in csv file with name data_file. ***
-def get_weather_features(data_file):
+
+# get_features_arso: get matrix of processed weather features stored in csv file with name data_file. ***
+# This function also returns a column vector of datetime objects corresponding to the rows in the matrix of weather data.
+def get_features_arso(data_file):
+    # Read weather data csv file and transform into numpy matrix.
+    reader = csv.reader(open(data_file, "r"), delimiter=",")
+    x = list(reader)
+    # Get weather data matrix.
+    weather_data_matrix = np.array(x)
+
+    # Define string for parsing the date from the date column
+    datetime_parse_str = "%m/%d/%Y"
+
+    # Allocate column vector for storing the datetime objects.
+    dt_col = np.empty(weather_data_matrix.shape[0], dtype=object)
+    # Define and initialize row counter.
+    r_count = 0
+    # Obtain a column of datetime objects corresponding to the rows in the matrix.
+    for date in weather_data_matrix[:, 0]:
+        # Parse date from date column and add to vector.
+        date_obj = datetime.datetime.strptime(date, datetime_parse_str)
+        dt_col[r_count] = date_obj
+        r_count += 1
+
+    # Return weather data matrix and the datetime column vector.
+    # Leave out the date
+    return weather_data_matrix[:,1:], dt_col
+
+
+# join_lpp_arso: join the lpp and arso feature matrices by the date column.
+def join_lpp_arso():
     # TODO
+    pass
+
+
+# TODO enclapsulate in class that shows only this function (method).
+
+
+# get_feature_matrix_training: get matrix of features obtained from the LPP and ARSO data sheets including the
+# values of the target variable obtained from the training set.
+def get_feature_matrix_training():
+    # TODO return matrix that is appropriate for regression analysis.
+    # Make sure to convert all the values to integers.
+    # Get values of target variable from training data set.
+
+    #delta_t_feature = elapsed_time(start_col, end_col)
+
+    pass
+
+# get_feature_matrix_test: get matrix of features obtained from the LPP and ARSO data sheets without the
+# target variable column.
+def get_feature_matrix_test():
+    # Similar as above but exclude the values of the target variable.
     pass

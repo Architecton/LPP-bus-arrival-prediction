@@ -1,17 +1,22 @@
 import numpy as np
 import csv
-from feature_eng import *
+from lib_naloga3 import feature_eng
 
 # DataProcessor: Class implementing methods used to create a feature matrix that can be used for regression analysis.
 class DataProcessor:
 
     # Constructor: initialize instance with file containing the data.
     def __init__(self, data_file):
-        # Create matrix out of
+        # Create numpy matrix out of the LPP data sheet
         reader = csv.reader(open(data_file, "r"), delimiter="\t")
         x = list(reader)
         self.data_matrix = np.array(x)
+
+        # bus_line_matrices maps bus line numbers to their matrices obtained from the LPP data sheet.
         self.bus_line_matrices = None
+
+        # bus_line_feature_matrices maps bus lines to their processed matrices that can be used for linear regression.
+        self.bus_line_feature_matrices = None
 
 
     # _get_bus_line_matrices: make a dictionary that maps each bus line to a matrix of its
@@ -27,15 +32,16 @@ class DataProcessor:
 
         np.fromiter((add_line_row(row) for row in self.data_matrix[1:,:]), self.data_matrix.dtype, count=len(self.data_matrix[1:,:]))
 
+
     # _engineer_features: construct new features from the composite features found in the data file and add to data matrix.
     # Also add weather features obtained from ARSO website.
     def _engineer_features(self):
-        # TODO create a new class feature engineering with methods that append features to matrices
-        pass
+        # Go over bus lines and construct feature matrices that are appropriate for regression analysis.
+        for bus_line in self.bus_line_matrices.keys():
+            self.bus_line_feature_matrices[bus_line] = feature_eng.get_feature_matrix_training(self.bus_line_matrices[bus_line])
 
-    def add_features(self):
 
-
+# Run data processing to get data.
 if __name__ == '__main__':
     dp = DataProcessor('test.csv')
     dp._get_bus_line_matrices()

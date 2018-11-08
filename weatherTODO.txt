@@ -1,4 +1,2 @@
 # TODO - 8./9.11.2018
-Zakodiraj smeri vetra
 Združi smiselne značilke s pca
-Združi matriko vremena z matriko značilk iz LPP datoteke.
