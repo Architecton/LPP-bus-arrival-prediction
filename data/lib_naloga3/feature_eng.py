@@ -2,6 +2,7 @@ import datetime
 import numpy as np
 import csv
 import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
 
 
 # decompose_datetime: take the date column and create a matrix containing the day, hour, minutes and seconds as columns.
@@ -133,7 +134,10 @@ def get_dir_feature(route_direction_col):
         col_cpy[col_cpy == unique_vals[u]] = str(enc)
         enc += 1
 
-    return col_cpy.astype(int).reshape((len(col_cpy), 1))
+    # Initialize OneHotEncoder instance.
+    onehot_encoder = OneHotEncoder(sparse=False)
+    # Return one-hot encoded result.
+    return onehot_encoder.fit_transform(col_cpy.astype(int).reshape((len(col_cpy), 1)))
 
 
 # registration_to_num: take registration column and extract the numerical part of each cell.
@@ -156,8 +160,12 @@ def registration_to_num(registration_col):
 
         r_count += 1
 
+    # Initialize OneHotEncoder instance.
+    onehot_encoder = OneHotEncoder(sparse=False)
+    # Return one-hot encoded result.
+
     # Return result.
-    return res
+    return onehot_encoder.fit_transform(res)
 
 
 # elpased_time: compute elapsed time in seconds between departure and arrival.
@@ -193,7 +201,12 @@ def get_features_lpp(driver_id_col, datetime_col, route_direction_col, registrat
     datetime_features, dt_col = decompose_datetime(datetime_col)
     dir_feature = get_dir_feature(route_direction_col)
     reg_feature = registration_to_num(registration_col)
-    res_features = np.hstack((driver_id_col.reshape((len(driver_id_col), 1)).astype(float), datetime_features, dir_feature, reg_feature))
+
+    # Initialize OneHotEncoder instance.
+    onehot_encoder = OneHotEncoder(sparse=False)
+
+    # Stack feature matrices together side by side. Perform one-hot encoding on the driver id.
+    res_features = np.hstack((onehot_encoder.fit_transform(driver_id_col.reshape((len(driver_id_col), 1)).astype(float)), datetime_features, dir_feature, reg_feature))
     return res_features, dt_col
 
 
