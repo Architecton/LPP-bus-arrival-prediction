@@ -278,8 +278,8 @@ def get_feature_matrix_train(lpp_line_matrix):
     res = join_lpp_arso(features_lpp, features_arso, dt_lpp, dt_arso)
     # Get target/dependent variable values.
     target = elapsed_time(lpp_line_matrix[:, 6], lpp_line_matrix[:, 8])
-    # Return feature matrix and independent variable column vector.
-    return res.astype(float), target
+    # Return feature matrix, target variable values and start times column transformed to datetime instances.
+    return res.astype(float), target, dt_lpp
 
 
 # get_feature_matrix_test: get matrix of features obtained from the LPP and ARSO data sheets without the
@@ -297,5 +297,5 @@ def get_feature_matrix_test(lpp_line_matrix):
     features_arso, dt_arso = get_features_arso('ljubljana_2012_vreme_raw.csv')
     # Join LPP feature matrix with weather feature matrix.
     res = join_lpp_arso(features_lpp, features_arso, dt_lpp, dt_arso)
-    # return feature matrix.
-    return res.astype(float)
+    # return feature matrix and start times column transformed to datetime instances.
+    return res.astype(float), dt_lpp
