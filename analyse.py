@@ -7,9 +7,11 @@ from regression_analysis import *
 import results_generator
 import pdb
 
-X = np.load('predictors.npy')
-y = np.load('target.npy')
-start_times = np.load('start_times.npy')
+X = np.load('data-processing/predictors_train.npy')
+X_test = np.load('data-processing/predictors_test.npy')
+y = np.load('data_processing/target_train.npy')
+start_times_train = np.load('data-processing/start_times_train.npy')
+start_times_test = np.load('data-processing/start_times_test.npy')
 
 print('Choose regression model:')
 print('1 - linear regression (scikit-learn)')
@@ -29,17 +31,17 @@ if reg_model_sel == 1:
     polynomial_degree = int(input('Enter degree of polynomial to use. '))
     X_reg, coeff = regression_analysis2.regression_analysis(X, y, polynomial_degree, sklearn.linear_model.LinearRegression, False)
     res = np.sum(X_reg * coeff, axis=1)
-    results_generator.print_results(start_times, res)
+    results_generator.print_results(start_times_train, res)
 elif reg_model_sel == 2:
     polynomial_degree = int(input('Enter degree of polynomial to use. '))
     X_reg, coeff = regression_analysis2.regression_analysis(X, y, polynomial_degree, sklearn.linear_model.RidgeCV, True)
     res = np.sum(X_reg * coeff, axis=1)
-    results_generator.print_results(start_times, res)
+    results_generator.print_results(start_times_test, res)
 elif reg_model_sel == 3:
     polynomial_degree = int(input('Enter degree of polynomial to use. '))
     X_reg, coeff = regression_analysis2.regression_analysis(X, y, polynomial_degree, sklearn.linear_model.LassoCV, True)
     res = np.sum(X_reg * coeff, axis=1)
-    results_generator.print_results(start_times, res)
+    results_generator.print_results(start_times_test, res)
 elif reg_model_sel == 4:
     polynomial_degree = int(input('Enter degree of polynomial to use. '))
     poly = PolynomialFeatures(degree=polynomial_degree)
@@ -48,7 +50,7 @@ elif reg_model_sel == 4:
     new_X = new_X.todense()
     coeff = huber.coef_
     res = np.sum(np.matmul(new_X, coeff.reshape(len(coeff), 1)), axis=1)
-    results_generator.print_results(start_times, res)
+    results_generator.print_results(start_times_test, res)
 elif reg_model_sel == 5:
     polynomial_degree = int(input('Enter degree of polynomial to use. '))
     poly = PolynomialFeatures(degree=polynomial_degree)

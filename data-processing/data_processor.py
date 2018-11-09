@@ -44,10 +44,17 @@ class DataProcessor:
 
 # Run data processing to get data.
 if __name__ == '__main__':
-    dp = DataProcessor('precompetition_data/train_pred.csv')
-    dp._get_bus_line_matrices()
-    stirinajstka = dp.bus_line_matrices['14']
+    dp1 = DataProcessor('precompetition_data/train_pred.csv')
+    dp1._get_bus_line_matrices()
+    stirinajstka = dp1.bus_line_matrices['14']
     features, target, start_times = feature_eng.get_feature_matrix_train(stirinajstka)
-    np.save('feat.npy', features)
-    np.save('target.npy', target)
-    np.save('start_times.npy', start_times)
+    np.save('predictors_train.npy', features)
+    np.save('target_train.npy', target)
+    np.save('start_times_train.npy', start_times)
+
+    dp2 = DataProcessor('precompetition_data/test_pred.csv')
+    dp2._get_bus_line_matrices()
+    stirinajstka = dp1.bus_line_matrices['14']
+    features, start_times = feature_eng.get_feature_matrix_test(stirinajstka)
+    np.save('predictors_test.npy', features)
+    np.save('start_times_test.npy', start_times)
