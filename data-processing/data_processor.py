@@ -1,7 +1,7 @@
 import numpy as np
 import csv
 from lib_naloga3 import feature_eng
-import pdb
+
 
 # DataProcessor: Class implementing methods used to create a feature matrix that can be used for regression analysis.
 class DataProcessor:
@@ -47,14 +47,14 @@ if __name__ == '__main__':
     dp1 = DataProcessor('precompetition_data/train_pred.csv')
     dp1._get_bus_line_matrices()
     stirinajstka = dp1.bus_line_matrices['14']
-    features, target, start_times = feature_eng.get_feature_matrix_train(stirinajstka)
-    np.save('predictors_train.npy', features)
+    features1, target, start_times1 = feature_eng.get_feature_matrix_train(stirinajstka)
+    np.save('predictors_train.npy', features1)
     np.save('target_train.npy', target)
-    np.save('start_times_train.npy', start_times)
+    np.save('start_times_train.npy', start_times1)
 
     dp2 = DataProcessor('precompetition_data/test_pred.csv')
     dp2._get_bus_line_matrices()
-    stirinajstka = dp1.bus_line_matrices['14']
-    features, start_times = feature_eng.get_feature_matrix_test(stirinajstka)
-    np.save('predictors_test.npy', features)
-    np.save('start_times_test.npy', start_times)
+    stirinajstka = dp2.bus_line_matrices['14']
+    features2, start_times2 = feature_eng.get_feature_matrix_test(stirinajstka)
+    np.save('predictors_test.npy', features2)
+    np.save('start_times_test.npy', start_times2)

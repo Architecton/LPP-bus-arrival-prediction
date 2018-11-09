@@ -2,7 +2,6 @@ import datetime
 import numpy as np
 import csv
 import pandas as pd
-from sklearn.preprocessing import OneHotEncoder
 
 
 # decompose_datetime: take the date column and create a matrix containing the day, hour, minutes and seconds as columns.
@@ -120,54 +119,6 @@ def is_information_day(date_obj):
         return False
 
 
-# get_dir_feature: take the route direction column and encode the to-from directions with simple binary encoding.
-# Note: the route direction column should come from a matrix for a single line. ***
-def get_dir_feature(route_direction_col):
-    # Get unique values of column.
-    unique_vals = np.unique(route_direction_col)
-    # Create a copy of the passed column
-    col_cpy = route_direction_col.copy()
-    # Start encoding with 0.
-    enc = 0
-    # Go over unique values of column and encode with numeric values.
-    for u in range(len(unique_vals)):
-        col_cpy[col_cpy == unique_vals[u]] = str(enc)
-        enc += 1
-
-    # Initialize OneHotEncoder instance.
-    onehot_encoder = OneHotEncoder(sparse=False)
-    # Return one-hot encoded result.
-    return onehot_encoder.fit_transform(col_cpy.astype(int).reshape((len(col_cpy), 1)))
-
-
-# registration_to_num: take registration column and extract the numerical part of each cell.
-# Note that some registration numbers contain a star. Also create a star feature and return both in matrix.
-# return results as column vector of same size. ***
-def registration_to_num(registration_col):
-    # Allocate vector for results.
-    res = np.empty([len(registration_col), 2], dtype=int)
-    # Initialize row counter.
-    r_count = 0
-    # Go over columns and parse numbers.
-    for col in registration_col:
-        # If number does not end with a star
-        if col[-1] != '*':
-            res[r_count, 0] = int(col[7:])
-            res[r_count, 1] = 0
-        else:
-            res[r_count] = int(col[7:-1])
-            res[r_count, 1] = 1
-
-        r_count += 1
-
-    # Initialize OneHotEncoder instance.
-    onehot_encoder = OneHotEncoder(sparse=False)
-    # Return one-hot encoded result.
-
-    # Return result.
-    return onehot_encoder.fit_transform(res)
-
-
 # elpased_time: compute elapsed time in seconds between departure and arrival.
 # THIS IS THE TARGET VARIABLE THAT WILL BE PREDICTED ON THE TEST DATA.
 # The datetime of arrival will be computed by adding the elapsed time to the start time.
@@ -196,18 +147,11 @@ def elapsed_time(start_col, end_col):
 # get_features_lpp: get matrix of new features obtained from the datetime and registration columns
 # Also append elapsed time feature.
 # This function also returns a column vector of datetime objects corresponding to the rows in the datetime_col.
-def get_features_lpp(driver_id_col, datetime_col, route_direction_col, registration_col):
+def get_features_lpp(datetime_col):
     # Get features and stack side by side.
     datetime_features, dt_col = decompose_datetime(datetime_col)
-    dir_feature = get_dir_feature(route_direction_col)
-    reg_feature = registration_to_num(registration_col)
 
-    # Initialize OneHotEncoder instance.
-    onehot_encoder = OneHotEncoder(sparse=False)
-
-    # Stack feature matrices together side by side. Perform one-hot encoding on the driver id.
-    res_features = np.hstack((onehot_encoder.fit_transform(driver_id_col.reshape((len(driver_id_col), 1)).astype(float)), datetime_features, dir_feature, reg_feature))
-    return res_features, dt_col
+    return datetime_features, dt_col
 
 
 # get_features_arso: get matrix of processed weather features stored in csv file with name data_file. ***
@@ -269,9 +213,7 @@ def get_feature_matrix_train(lpp_line_matrix):
     route_direction_col = 3
     registration_col = 0
     # Get features by performing feature engineering on the LPP data matrix.
-    features_lpp, dt_lpp = get_features_lpp(lpp_line_matrix[:, 1], lpp_line_matrix[:, datetime_col],
-                                            lpp_line_matrix[:, route_direction_col],
-                                            lpp_line_matrix[:, registration_col])
+    features_lpp, dt_lpp = get_features_lpp(lpp_line_matrix[:, datetime_col])
     # Get weather features and datetime linking column vector.
     features_arso, dt_arso = get_features_arso('ljubljana_2012_vreme_raw.csv')
     # Join LPP feature matrix with weather feature matrix.
@@ -290,9 +232,7 @@ def get_feature_matrix_test(lpp_line_matrix):
     route_direction_col = 3
     registration_col = 0
     # Get features by performing feature engineering on the LPP data matrix.
-    features_lpp, dt_lpp = get_features_lpp(lpp_line_matrix[:, 1], lpp_line_matrix[:, datetime_col],
-                                            lpp_line_matrix[:, route_direction_col],
-                                            lpp_line_matrix[:, registration_col])
+    features_lpp, dt_lpp = get_features_lpp(lpp_line_matrix[:, datetime_col])
     # Get weather features and datetime linking column vector.
     features_arso, dt_arso = get_features_arso('ljubljana_2012_vreme_raw.csv')
     # Join LPP feature matrix with weather feature matrix.

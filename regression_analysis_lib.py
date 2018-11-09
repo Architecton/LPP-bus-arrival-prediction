@@ -1,9 +1,33 @@
+import scipy.sparse as sp
 import numpy
 from scipy.optimize import fmin_l_bfgs_b
-import scipy.sparse
-import scipy.sparse as sp
+from sklearn.preprocessing import PolynomialFeatures
 import numpy as np
 
+
+## Function for regression modelling using the scikit-learn library ##
+
+# regression_analysis: perform regression analysis on feature matrix X and target matrix y.
+# Construct regression matrix of degree specified by the polynomial_degree argument. Accepts optional
+# alpha parameter for the regression function.
+def regression_analysis(x, y, polynomial_degree, model_func, param):
+    poly = PolynomialFeatures(degree=polynomial_degree)
+    new_x = poly.fit_transform(x)
+
+    # If regression function takes a parameter
+    if param:
+        reg = model_func(alphas=np.linspace(0.1, 10, 20), cv=3)
+    else:
+        reg = model_func()
+
+    # Fit polynomial
+    reg.fit(new_x, y)
+    # Return regression matrix and regression coefficients
+    return new_x, reg.coef_
+
+######################################################################
+
+#  Regression model written by assistants at FRI
 
 # append_ones: append ones to the right side of the feature matrix.
 def append_ones(X):
@@ -66,32 +90,3 @@ class LinearRegClassifier(object):
         """
         x = numpy.hstack(([1.], x))
         return hl(x, self.th)
-
-# test with basic dataset.
-if __name__ == "__main__":
-
-    verbose = 0
-
-    import Orange
-
-    # iris: get feature matrix and target variable values of the iris data set.
-    def iris():
-        # Get data from Orange
-        data = Orange.data.Table("iris")
-        # Return the features matrix and the target variable results vector.
-        return data.X, data.Y
-
-    # Get predictor and target matrices.
-    X, y = iris()
-
-    # Get sparse matrix representation.
-    Xsp = scipy.sparse.csr_matrix(X)
-
-    # Define a LinearLearner instance.
-    lr = LinearLearner(lambda_=1.)
-
-    # Get prediction function.
-    linear = lr(Xsp,y)
-
-    for a in X:
-        print(linear(a))
