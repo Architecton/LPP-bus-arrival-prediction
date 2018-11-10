@@ -4,13 +4,26 @@
     <list default="true" id="2ed82c86-2ac7-4fbe-afea-64a9fff7c68f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/analyse.py" beforeDir="false" afterPath="$PROJECT_DIR$/analyse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-processing/data_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/data-processing/data_processor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-processing/lib_naloga3/feature_eng.py" beforeDir="false" afterPath="$PROJECT_DIR$/data-processing/lib_naloga3/feature_eng.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-processing/predictors_test.npy" beforeDir="false" afterPath="$PROJECT_DIR$/data-processing/predictors_test.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-processing/predictors_train.npy" beforeDir="false" afterPath="$PROJECT_DIR$/data-processing/predictors_train.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-processing/start_times_test.npy" beforeDir="false" afterPath="$PROJECT_DIR$/data-processing/start_times_test.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/regression_analysis.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/regression_analysis2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processing/competition_data/test.csv.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processing/competition_data/train.csv.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processing/data_processor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processing/lib_naloga3/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processing/lib_naloga3/feature_eng.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processing/lib_naloga3/ljubljana_2012_vreme_raw.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processing/ljubljana_2012_vreme.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processing/ljubljana_2012_vreme_raw.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processing/precompetition_data/.~lock.train_pred.csv#" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processing/precompetition_data/test_pred.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processing/precompetition_data/test_pred.csv.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processing/precompetition_data/train_pred.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processing/precompetition_data/train_pred.csv.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processing/predictors_test.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processing/predictors_train.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processing/start_times_test.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processing/start_times_train.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processing/target_train.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results.txt" beforeDir="false" afterPath="$PROJECT_DIR$/results.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results_generator.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,11 +38,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="analyse.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="analyse.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/analyse.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="64" column="30" selection-start-line="64" selection-start-column="30" selection-end-line="64" selection-end-column="30" />
+            <state relative-caret-position="195">
+              <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -37,10 +50,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="feature_selector.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="feature_selector.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/feature_selector.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-136">
+            <state relative-caret-position="15">
               <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
             </state>
           </provider>
@@ -49,7 +62,8 @@
       <file leaf-file-name="regression_analysis_lib.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/regression_analysis_lib.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-556">
+            <state relative-caret-position="240">
+              <caret line="16" column="37" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -93,9 +107,9 @@
         <option value="$PROJECT_DIR$/data-processing/lib_naloga3/feature_eng.py" />
         <option value="$PROJECT_DIR$/regression_analysis.py" />
         <option value="$PROJECT_DIR$/regression_analysis2.py" />
-        <option value="$PROJECT_DIR$/analyse.py" />
         <option value="$PROJECT_DIR$/data-processing/data_processor.py" />
         <option value="$PROJECT_DIR$/feature_selector.py" />
+        <option value="$PROJECT_DIR$/analyse.py" />
       </list>
     </option>
   </component>
@@ -117,6 +131,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -124,16 +139,10 @@
               <item name="LPP-bus-arrival-prediction" type="b2602c69:ProjectViewProjectNode" />
               <item name="LPP-bus-arrival-prediction" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="LPP-bus-arrival-prediction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LPP-bus-arrival-prediction" type="462c0819:PsiDirectoryNode" />
-              <item name="data-processing" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -239,6 +248,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1920" height="1080" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -248,7 +258,7 @@
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32983193" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32983193" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32983193" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4989496" visible="true" weight="0.22945571" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4989496" visible="true" weight="0.23212379" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="4" sideWeight="0.49579832" weight="0.15955175" />
@@ -367,19 +377,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/analyse.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="64" column="30" selection-start-line="64" selection-start-column="30" selection-end-line="64" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/regression_analysis_lib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-556">
+        <state relative-caret-position="240">
+          <caret line="16" column="37" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
@@ -388,8 +389,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/feature_selector.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-136">
+        <state relative-caret-position="15">
           <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analyse.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
