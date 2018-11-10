@@ -1,6 +1,7 @@
 import numpy as np
 import csv
 from lib_naloga3 import feature_eng
+import os
 
 
 # DataProcessor: Class implementing methods used to create a feature matrix that can be used for regression analysis.
@@ -14,10 +15,10 @@ class DataProcessor:
         self.data_matrix = np.array(x)
 
         # bus_line_matrices maps bus line numbers to their matrices obtained from the LPP data sheet.
-        self.bus_line_matrices = None
+        self.bus_line_matrices = dict()
 
         # bus_line_feature_matrices maps bus lines to their processed matrices that can be used for linear regression.
-        self.bus_line_feature_matrices = None
+        self.bus_line_feature_matrices = dict()
 
 
     # _get_bus_line_matrices: make a dictionary that maps each bus line to a matrix of its
@@ -46,15 +47,21 @@ class DataProcessor:
 if __name__ == '__main__':
     dp1 = DataProcessor('precompetition_data/train_pred.csv')
     dp1._get_bus_line_matrices()
-    stirinajstka = dp1.bus_line_matrices['14']
-    features1, target, start_times1 = feature_eng.get_feature_matrix_train(stirinajstka)
-    np.save('predictors_train.npy', features1)
-    np.save('target_train.npy', target)
-    np.save('start_times_train.npy', start_times1)
 
     dp2 = DataProcessor('precompetition_data/test_pred.csv')
     dp2._get_bus_line_matrices()
-    stirinajstka = dp2.bus_line_matrices['14']
-    features2, start_times2 = feature_eng.get_feature_matrix_test(stirinajstka)
-    np.save('predictors_test.npy', features2)
-    np.save('start_times_test.npy', start_times2)
+
+    for line_name in dp1.bus_line_matrices.keys():
+        nxt = dp1.bus_line_matrices[line_name]
+        features, target, start_times = feature_eng.get_feature_matrix_train(nxt)
+        os.mkdir('bus-line-data-train/' + line_name)
+        np.save('bus-line-data-train/' + line_name + '/predictors_train.npy', features)
+        np.save('bus-line-data-train/' + line_name + '/target_train.npy', target)
+        np.save('bus-line-data-train/' + line_name + '/start_times_train.npy', start_times)
+
+    for line_name in dp2.bus_line_matrices.keys():
+        nxt = dp2.bus_line_matrices[line_name]
+        features, start_times = feature_eng.get_feature_matrix_test(nxt)
+        os.mkdir('bus-line-data-test/' + line_name)
+        np.save('bus-line-data-test/' + line_name + '/predictors_test.npy', features)
+        np.save('bus-line-data-test/' + line_name + '/start_times_test.npy', start_times)
