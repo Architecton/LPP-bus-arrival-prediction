@@ -159,10 +159,13 @@ def get_dir_feature(route_direction_col):
         col_cpy[col_cpy == unique_vals[u]] = str(enc)
         enc += 1
 
+    print(enc)
     # Initialize OneHotEncoder instance.
     onehot_encoder = OneHotEncoder(sparse=False)
     # Return one-hot encoded result.
-    return onehot_encoder.fit_transform(col_cpy.astype(int).reshape((len(col_cpy), 1)))
+    res = onehot_encoder.fit_transform(col_cpy.astype(int).reshape((len(col_cpy), 1)))
+    res = np.hstack((res, np.zeros((res.shape[0], 20 - res.shape[1]))))
+    return res
 
 
 # get_features_lpp: get matrix of new features obtained from the datetime and registration columns

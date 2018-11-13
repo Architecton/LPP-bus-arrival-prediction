@@ -1,0 +1,3 @@
+- randomly select n samples as training data
+- make remaining N - n samples the test data
+- transform the fitness function to return MAE on test data

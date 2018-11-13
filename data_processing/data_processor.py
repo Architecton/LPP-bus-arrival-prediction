@@ -2,7 +2,7 @@ import numpy as np
 import csv
 from lib_naloga3 import feature_eng
 import os
-
+import pdb
 
 # DataProcessor: Class implementing methods used to create a feature matrix that can be used for regression analysis.
 class DataProcessor:
@@ -45,12 +45,14 @@ class DataProcessor:
 
 # Run data processing to get data.
 if __name__ == '__main__':
-    dp1 = DataProcessor('precompetition_data/train_pred.csv')
+    # Create DataProcessor instances and initialize with training and test data.
+    dp1 = DataProcessor('competition_data/train.csv')
     dp1._get_bus_line_matrices()
 
-    dp2 = DataProcessor('precompetition_data/test_pred.csv')
+    dp2 = DataProcessor('competition_data/test.csv')
     dp2._get_bus_line_matrices()
 
+    # Create files containing data for training and test data.
     for line_name in dp1.bus_line_matrices.keys():
         nxt = dp1.bus_line_matrices[line_name]
         features, target, start_times = feature_eng.get_feature_matrix_train(nxt)
