@@ -164,7 +164,7 @@ def get_dir_feature(route_direction_col):
     onehot_encoder = OneHotEncoder(sparse=False)
     # Return one-hot encoded result.
     res = onehot_encoder.fit_transform(col_cpy.astype(int).reshape((len(col_cpy), 1)))
-    res = np.hstack((res, np.zeros((res.shape[0], 20 - res.shape[1]))))
+    res = np.hstack((res, np.zeros((res.shape[0], 14 - res.shape[1]))))
     return res
 
 
@@ -175,8 +175,6 @@ def get_features_lpp(datetime_col, route_col):
     # Get features and stack side by side.
     dir_features = get_dir_feature(route_col)
     datetime_features, dt_col = decompose_datetime(datetime_col)
-
-    # TODO: pad dir_features with zeros until same length for training and test data.
     return np.hstack((datetime_features, dir_features)), dt_col
 
 

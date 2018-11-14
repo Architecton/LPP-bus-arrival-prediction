@@ -1,8 +1,0 @@
-- user chooses regression model
-- create empty dictionary that maps line numbers to regression coefficients
-- go over line numbers (folder names for lines in training data)
-- get regression coefficients and store to dictionary.
-
-- go over "master feature matrix"
-- check line numbers
-- apply coefficients for this line, compute result and write to file.

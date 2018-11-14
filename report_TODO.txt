@@ -1,0 +1,1 @@
+- add sources for inspyred library and weather data in footers.
