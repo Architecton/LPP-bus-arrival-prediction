@@ -4,6 +4,9 @@ from scipy.optimize import fmin_l_bfgs_b
 from sklearn.preprocessing import PolynomialFeatures
 import numpy as np
 
+########################
+# Author: Jernej Vivod #
+########################
 
 ## Function for regression modelling using the scikit-learn library ##
 
@@ -50,7 +53,7 @@ def hl(x, theta):
 
 # cost_grad_linear:
 def cost_grad_linear(theta, X, y, lambda_):
-    # do not regularize the first element
+    # Do not regularize the first element.
     sx = hl(X, theta)
     j = 0.5*numpy.mean((sx-y)*(sx-y)) + 1/2.*lambda_*theta[1:].dot(theta[1:])/y.shape[0]
     grad = X.T.dot(sx-y)/y.shape[0] + numpy.hstack([[0.],lambda_*theta[1:]])/y.shape[0]

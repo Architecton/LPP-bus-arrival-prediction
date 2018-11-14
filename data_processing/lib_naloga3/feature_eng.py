@@ -4,6 +4,14 @@ import csv
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 
+########################
+# Author: Jernej Vivod #
+########################
+
+"""
+This script is used to perform feature engineering on the data found in the raw data files and to get the matrices
+to a form that can be used for regression analysis.
+"""
 
 # decompose_datetime: take the date column and create a matrix containing the day, hour, minutes and seconds as columns.
 # Also create a column vector of datetime objects for the data.
@@ -164,6 +172,8 @@ def get_dir_feature(route_direction_col):
     onehot_encoder = OneHotEncoder(sparse=False)
     # Return one-hot encoded result.
     res = onehot_encoder.fit_transform(col_cpy.astype(int).reshape((len(col_cpy), 1)))
+    # Append empty columns so that feature matrix for each line is of equal width.
+    # Note that the maximum width of the one-hot encoded result is 14.
     res = np.hstack((res, np.zeros((res.shape[0], 14 - res.shape[1]))))
     return res
 

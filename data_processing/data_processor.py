@@ -2,7 +2,16 @@ import numpy as np
 import csv
 from lib_naloga3 import feature_eng
 import os
-import pdb
+
+########################
+# Author: Jernej Vivod #
+########################
+
+"""
+This script is used to generate the processed data files for each bus line.
+The resulting data files are stored in bus-line-data-test and bus-line-data-train folders. Each bus line is assigned
+a separate folder. The data in the folders is queried by the results file generating script.
+"""
 
 # DataProcessor: Class implementing methods used to create a feature matrix that can be used for regression analysis.
 class DataProcessor:
@@ -45,6 +54,7 @@ class DataProcessor:
 
 # Run data processing to get data.
 if __name__ == '__main__':
+    print('Processing data for each bus line. This may take a while.')
     # Create DataProcessor instances and initialize with training and test data.
     dp1 = DataProcessor('competition_data/train.csv')
     dp1._get_bus_line_matrices()
@@ -67,3 +77,4 @@ if __name__ == '__main__':
         os.mkdir('bus-line-data-test/' + line_name)
         np.save('bus-line-data-test/' + line_name + '/predictors_test.npy', features)
         np.save('bus-line-data-test/' + line_name + '/start_times_test.npy', start_times)
+    print('Done.')

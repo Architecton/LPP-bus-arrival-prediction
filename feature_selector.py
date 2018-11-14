@@ -8,6 +8,10 @@ import os
 import time
 import inspyred
 
+########################
+# Author: Jernej Vivod #
+########################
+
 ## FEATURE SELECTION WITH A GENETIC ALGORITHM ##
 
 
@@ -53,7 +57,6 @@ if __name__ == '__main__':
 
             # Return MAE.
             return -sklearn.metrics.mean_absolute_error(y[test_idx], res)
-
 
         rand = random.Random()
         rand.seed(int(time.time()))

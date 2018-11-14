@@ -1,5 +1,9 @@
 import datetime
 
+########################
+# Author: Jernej Vivod #
+########################
+
 # get_arrival_time: get predicted time of arrival by adding the predicted trip length
 # to the starting time.
 def get_arrival_time(start_time, travel_seconds):
