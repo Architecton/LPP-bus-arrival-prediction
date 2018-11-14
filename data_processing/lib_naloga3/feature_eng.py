@@ -167,7 +167,6 @@ def get_dir_feature(route_direction_col):
         col_cpy[col_cpy == unique_vals[u]] = str(enc)
         enc += 1
 
-    print(enc)
     # Initialize OneHotEncoder instance.
     onehot_encoder = OneHotEncoder(sparse=False)
     # Return one-hot encoded result.

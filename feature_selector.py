@@ -70,7 +70,7 @@ if __name__ == '__main__':
                               generator=generate_sel,
                               max_evaluations=10,
                               num_elites=1,
-                              pop_size=10,
+                              pop_size=100,
                               mp_num_cpus=8,
                               num_bits=X.shape[1])
 
